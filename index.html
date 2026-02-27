@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Luca Trevisani</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg:    #0a0a0a;
+      --text:  #e8e8e8;
+      --muted: #6b7280;
+      --link:  #fbbf24;   /* amarelo */
+      --line:  #1f1f1f;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', -apple-system, sans-serif;
+      font-weight: 300;
+      line-height: 1.6;
+      min-height: 100svh;
+      padding-bottom: 100px; /* espaço para o dock */
+    }
+
+    a {
+      color: var(--link);
+      text-decoration: none;
+    }
+    a:hover { text-decoration: underline; }
+
+    /* ── Layout ── */
+    main {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 60px 24px 0;
+    }
+
+    /* ── Cabeçalho ── */
+    header {
+      margin-bottom: 48px;
+    }
+
+    .site-name {
+      font-size: 1.1rem;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      margin-bottom: 6px;
+    }
+
+    .site-desc {
+      font-size: 0.875rem;
+      color: var(--muted);
+    }
+
+    /* ── Nav ── */
+    nav {
+      margin-top: 20px;
+      display: flex;
+      gap: 18px;
+    }
+
+    nav a {
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+    nav a:hover { color: var(--text); text-decoration: none; }
+
+    /* ── Seção ── */
+    section {
+      margin-bottom: 48px;
+    }
+
+    h2 {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+
+    /* ── Lista de posts / projetos ── */
+    .list { list-style: none; }
+
+    .list li {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--line);
+      gap: 16px;
+    }
+
+    .list li:first-child { border-top: 1px solid var(--line); }
+
+    .list a {
+      font-size: 0.925rem;
+    }
+
+    .list .meta {
+      font-size: 0.8rem;
+      color: var(--muted);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    /* ── Bio / About ── */
+    .bio {
+      font-size: 0.925rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+    .bio a { color: var(--text); text-decoration: underline; text-underline-offset: 3px; }
+
+    /* ════════════════════════════
+       DOCK (detalhe no rodapé)
+    ════════════════════════════ */
+    .dock-wrap {
+      position: fixed;
+      bottom: 18px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 50;
+    }
+
+    .dock {
+      display: flex;
+      align-items: flex-end;
+      gap: 8px;
+      padding: 8px 12px;
+      background: rgba(15, 15, 15, 0.80);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      border-radius: 20px;
+      box-shadow:
+        0 8px 30px rgba(0,0,0,0.5),
+        inset 0 1px 0 rgba(255,255,255,0.04);
+    }
+
+    .dock-item {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .dock-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      transition:
+        width  .14s cubic-bezier(.34,1.56,.64,1),
+        height .14s cubic-bezier(.34,1.56,.64,1),
+        border-radius .14s ease,
+        font-size     .14s ease;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+      user-select: none;
+    }
+
+    .dock-tip {
+      position: absolute;
+      bottom: calc(100% + 10px);
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(20,20,20,.82);
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: .04em;
+      padding: 3px 8px;
+      border-radius: 6px;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .12s;
+    }
+
+    .dock-tip::after {
+      content: '';
+      position: absolute;
+      top: 100%; left: 50%;
+      transform: translateX(-50%);
+      border: 4px solid transparent;
+      border-top-color: rgba(20,20,20,.82);
+    }
+
+    .dock-item:hover .dock-tip { opacity: 1; }
+
+    /* Animação de entrada */
+    @keyframes up {
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    main   { animation: up .5s ease both; }
+    .dock-wrap { animation: up .6s .1s ease both; }
+  </style>
+</head>
+<body>
+
+  <main>
+
+    <!-- Cabeçalho -->
+    <header>
+      <p class="site-name">Luca Trevisani</p>
+      <p class="site-desc">Building data markets for AI · Physical AI · Multi-Agent Systems</p>
+      <nav>
+        <a href="#">Home</a>
+        <a href="#">About</a>
+        <a href="#">Writing</a>
+        <a href="#">Projects</a>
+      </nav>
+    </header>
+
+    <!-- Projetos -->
+    <section>
+      <h2>Projects</h2>
+      <ul class="list">
+        <li>
+          <a href="#">ExchAInge — Data marketplace for AI training</a>
+          <span class="meta">2024</span>
+        </li>
+        <li>
+          <a href="#">Omnivers — Physical AI &amp; multi-agent systems</a>
+          <span class="meta">2024</span>
+        </li>
+        <li>
+          <a href="#">Colpero — Cooperative robotics protocol</a>
+          <span class="meta">2024</span>
+        </li>
+      </ul>
+    </section>
+
+    <!-- Writing -->
+    <section>
+      <h2>Writing</h2>
+      <ul class="list">
+        <li>
+          <a href="#">Why physical AI needs better data markets</a>
+          <span class="meta">Coming soon</span>
+        </li>
+        <li>
+          <a href="#">Multi-agent cooperation and the x402 protocol</a>
+          <span class="meta">Coming soon</span>
+        </li>
+      </ul>
+    </section>
+
+    <!-- About -->
+    <section>
+      <h2>About</h2>
+      <p class="bio">
+        I'm Luca, a builder focused on data infrastructure for AI.
+        Currently working on <a href="#">ExchAInge</a>, a marketplace for AI training data,
+        and exploring multi-agent systems and cooperative robotics.
+        Reach me at <a href="mailto:luca@piolitrevisani.com">luca@piolitrevisani.com</a>.
+      </p>
+    </section>
+
+  </main>
+
+
+  <!-- Dock -->
+  <div class="dock-wrap">
+    <div class="dock" id="dockContainer">
+
+      <a class="dock-item" href="#">
+        <div class="dock-icon" style="background:linear-gradient(145deg,#1e1b4b,#312e81);">🏠</div>
+        <span class="dock-tip">Home</span>
+      </a>
+
+      <a class="dock-item" href="#">
+        <div class="dock-icon" style="background:linear-gradient(145deg,#3b0764,#581c87);">👤</div>
+        <span class="dock-tip">About</span>
+      </a>
+
+      <a class="dock-item" href="#">
+        <div class="dock-icon" style="background:linear-gradient(145deg,#172554,#1e3a8a);">✏️</div>
+        <span class="dock-tip">Writing</span>
+      </a>
+
+      <a class="dock-item" href="#">
+        <div class="dock-icon" style="background:linear-gradient(145deg,#064e3b,#065f46);">🚀</div>
+        <span class="dock-tip">Projects</span>
+      </a>
+
+      <a class="dock-item" href="mailto:luca@piolitrevisani.com">
+        <div class="dock-icon" style="background:linear-gradient(145deg,#78350f,#92400e);">✉️</div>
+        <span class="dock-tip">Contact</span>
+      </a>
+
+    </div>
+  </div>
+
+
+  <script>
+    /* Efeito de ampliação do dock */
+    const dock  = document.getElementById('dockContainer');
+    const items = dock.querySelectorAll('.dock-item');
+    const BASE  = 44, MAX = 70, SPREAD = 110;
+
+    function magnify(mx) {
+      items.forEach(item => {
+        const icon = item.querySelector('.dock-icon');
+        const rect = icon.getBoundingClientRect();
+        const cx   = rect.left + rect.width / 2;
+        const t    = Math.max(0, 1 - Math.abs(mx - cx) / SPREAD);
+        const s    = BASE + (MAX - BASE) * t;
+        icon.style.width        = s + 'px';
+        icon.style.height       = s + 'px';
+        icon.style.fontSize     = (s * .54) + 'px';
+        icon.style.borderRadius = (s * .27) + 'px';
+      });
+    }
+
+    function reset() {
+      items.forEach(item => {
+        const icon = item.querySelector('.dock-icon');
+        icon.style.width        = BASE + 'px';
+        icon.style.height       = BASE + 'px';
+        icon.style.fontSize     = (BASE * .54) + 'px';
+        icon.style.borderRadius = (BASE * .27) + 'px';
+      });
+    }
+
+    dock.addEventListener('mousemove',  e => magnify(e.clientX));
+    dock.addEventListener('mouseleave', reset);
+  </script>
+
+</body>
+</html>
