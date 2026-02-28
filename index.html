@@ -6,433 +6,346 @@
   <title>Luca Trevisani</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
 
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg:    #000;
-      --text:  #f0f0f0;
-      --muted: #555;
-      --link:  #60a5fa;
-      --line:  #1a1a1a;
+      --bg:     #F7F4EF;
+      --ink:    #1A1612;
+      --muted:  #8C8580;
+      --accent: #C4873A;
+      --border: #E2DDD6;
     }
 
     body {
       background: var(--bg);
-      color: var(--text);
-      font-family: 'Inter', -apple-system, sans-serif;
+      color: var(--ink);
+      font-family: 'DM Mono', monospace;
       font-weight: 300;
-      line-height: 1.7;
-      min-height: 100svh;
-      padding-bottom: 180px; /* espaço para o dock */
-    }
-
-    a { color: var(--link); text-decoration: none; }
-    a:hover { text-decoration: underline; }
-
-    main {
-      max-width: 640px;
-      margin: 0 auto;
-      padding: 64px 24px 0;
-    }
-
-    /* ── Header ── */
-    header { margin-bottom: 56px; }
-
-    .site-name {
-      font-size: 2.8rem;
-      font-weight: 600;
-      letter-spacing: -0.03em;
-      color: #fff;
-      line-height: 1.1;
-      margin-bottom: 20px;
-    }
-
-    nav { display: flex; gap: 20px; flex-wrap: wrap; }
-    nav a {
       font-size: 0.875rem;
-      font-weight: 400;
-      color: var(--muted);
-    }
-    nav a:hover { color: var(--text); text-decoration: none; }
-
-    /* ── Seções ── */
-    section { margin-bottom: 52px; }
-
-    h2 {
-      font-size: 0.7rem;
-      font-weight: 500;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 20px;
-    }
-
-    /* ── Listas ── */
-    .list { list-style: none; }
-    .list li {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      padding: 11px 0;
-      border-bottom: 1px solid var(--line);
-      gap: 16px;
-    }
-    .list li:first-child { border-top: 1px solid var(--line); }
-    .list a { font-size: 0.925rem; color: var(--text); }
-    .list a:hover { color: var(--link); text-decoration: none; }
-    .list .meta { font-size: 0.8rem; color: var(--muted); white-space: nowrap; flex-shrink: 0; }
-
-    /* ── Bio ── */
-    .bio {
-      font-size: 0.925rem;
-      color: #aaa;
       line-height: 1.75;
-      margin-bottom: 14px;
-    }
-    .bio:last-child { margin-bottom: 0; }
-    .bio a { color: var(--text); text-decoration: underline; text-underline-offset: 3px; }
-    .bio a:hover { color: var(--link); }
-
-    /* ── Rede neural (footer) ── */
-    .network-wrap {
-      width: 100%;
-      height: 320px;
-      position: relative;
-      overflow: hidden;
-      /* fade de cima pra baixo */
-      -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 30%, black 100%);
-      mask-image: linear-gradient(to bottom, transparent 0%, black 30%, black 100%);
-    }
-    #network-canvas {
-      width: 100%;
-      height: 100%;
-      display: block;
+      min-height: 100svh;
+      padding-top: 64px;
+      padding-bottom: 52px;
     }
 
-    /* ════════════ DOCK ════════════ */
-    .dock-wrap {
+    a { color: inherit; text-decoration: none; }
+
+    nav {
       position: fixed;
-      bottom: 18px;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 50;
-    }
-
-    .dock {
+      top: 0; left: 0; right: 0;
+      height: 56px;
       display: flex;
-      align-items: flex-end;
-      gap: 8px;
-      padding: 8px 12px;
-      background: rgba(10, 10, 10, 0.80);
-      backdrop-filter: blur(20px) saturate(180%);
-      -webkit-backdrop-filter: blur(20px) saturate(180%);
-      border: 1px solid rgba(255, 255, 255, 0.07);
-      border-radius: 20px;
-      box-shadow: 0 8px 30px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.04);
-    }
-
-    .dock-item {
-      position: relative;
-      display: flex;
-      flex-direction: column;
       align-items: center;
-      text-decoration: none;
+      justify-content: space-between;
+      padding: 0 24px;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      z-index: 100;
+    }
+
+    .nav-logo {
+      font-family: 'Instrument Serif', serif;
+      font-style: italic;
+      font-size: 1.1rem;
+      color: var(--ink);
       cursor: pointer;
     }
 
-    .dock-icon {
-      width: 44px;
+    .nav-links { display: flex; gap: 28px; }
+
+    .nav-links button {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-family: 'DM Mono', monospace;
+      font-weight: 300;
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding: 0;
+      transition: color 0.15s;
+    }
+
+    .nav-links button:hover,
+    .nav-links button.active { color: var(--ink); }
+
+    footer {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
       height: 44px;
-      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+      font-size: 0.7rem;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+      z-index: 100;
+    }
+
+    main {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 64px 24px 32px;
+    }
+
+    .page { display: none; animation: pageIn 0.35s ease both; }
+    .page.visible { display: block; }
+
+    @keyframes pageIn {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .section-gap { margin-bottom: 64px; }
+
+    .home-header {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      margin-bottom: 40px;
+    }
+
+    .avatar {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: var(--ink);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 24px;
-      transition:
-        width  .14s cubic-bezier(.34,1.56,.64,1),
-        height .14s cubic-bezier(.34,1.56,.64,1),
-        border-radius .14s ease,
-        font-size     .14s ease;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-      user-select: none;
+      flex-shrink: 0;
     }
 
-    .dock-tip {
-      position: absolute;
-      bottom: calc(100% + 10px);
-      left: 50%;
-      transform: translateX(-50%);
-      background: rgba(20,20,20,.9);
-      color: #fff;
-      font-family: 'Inter', sans-serif;
-      font-size: 11px;
+    .avatar span {
+      font-family: 'Instrument Serif', serif;
+      font-style: italic;
+      font-size: 1.6rem;
+      color: var(--bg);
+    }
+
+    .home-header-text h1 {
+      font-family: 'Instrument Serif', serif;
+      font-style: italic;
+      font-size: 1.5rem;
       font-weight: 400;
-      letter-spacing: .04em;
-      padding: 3px 8px;
-      border-radius: 6px;
-      white-space: nowrap;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity .12s;
-      border: 1px solid rgba(255,255,255,0.06);
+      line-height: 1.2;
+      margin-bottom: 6px;
     }
-    .dock-tip::after {
-      content: '';
-      position: absolute;
-      top: 100%; left: 50%;
-      transform: translateX(-50%);
-      border: 4px solid transparent;
-      border-top-color: rgba(20,20,20,.9);
-    }
-    .dock-item:hover .dock-tip { opacity: 1; }
 
-    /* Fade-in */
-    @keyframes up {
-      from { opacity: 0; transform: translateY(14px); }
-      to   { opacity: 1; transform: translateY(0); }
+    .home-header-text p {
+      font-size: 0.75rem;
+      color: var(--muted);
+      line-height: 1.5;
     }
-    main       { animation: up .5s ease both; }
-    .dock-wrap { animation: up .6s .15s ease both; }
+
+    .social-links {
+      display: flex;
+      gap: 16px;
+      margin-top: 28px;
+      flex-wrap: wrap;
+    }
+
+    .social-links a {
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      border-bottom: 1px solid var(--accent);
+      padding-bottom: 1px;
+      transition: opacity 0.15s;
+    }
+
+    .social-links a:hover { opacity: 0.7; }
+
+    .about-title, .books-title, .contact-title, .page-title {
+      font-family: 'Instrument Serif', serif;
+      font-style: italic;
+      font-size: 3rem;
+      font-weight: 400;
+      line-height: 1.1;
+      margin-bottom: 40px;
+    }
+
+    .contact-title { margin-bottom: 16px; }
+
+    .about-body p {
+      margin-bottom: 20px;
+      color: var(--ink);
+      line-height: 1.85;
+    }
+
+    .about-body strong {
+      font-weight: 400;
+      border-bottom: 1px solid var(--ink);
+      padding-bottom: 1px;
+    }
+
+    .contact-sub {
+      color: var(--muted);
+      margin-bottom: 48px;
+      line-height: 1.7;
+    }
+
+    .contact-list { list-style: none; }
+
+    .contact-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .contact-item:first-child { border-top: 1px solid var(--border); }
+
+    .contact-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .contact-link {
+      font-size: 0.85rem;
+      color: var(--accent);
+      transition: opacity 0.15s;
+    }
+
+    .contact-link:hover { opacity: 0.7; }
+
+    .books-link {
+      font-size: 0.85rem;
+      color: var(--accent);
+      border-bottom: 1px solid var(--accent);
+      padding-bottom: 1px;
+    }
+
+    @media (max-width: 600px) {
+      .nav-links { gap: 16px; }
+      .nav-links button { font-size: 0.6rem; }
+      .about-title, .books-title, .contact-title, .page-title { font-size: 2.2rem; }
+      .home-header { flex-direction: column; align-items: flex-start; }
+      footer { font-size: 0.6rem; padding: 0 16px; }
+    }
   </style>
 </head>
 <body>
 
+  <nav>
+    <span class="nav-logo" onclick="showPage('home')">Luca Trevisani</span>
+    <div class="nav-links">
+      <button onclick="showPage('home')"    id="nav-home">Home</button>
+      <button onclick="showPage('about')"   id="nav-about">About</button>
+      <button onclick="showPage('blog')"    id="nav-blog">Blog</button>
+      <button onclick="showPage('books')"   id="nav-books">Books</button>
+      <button onclick="showPage('contact')" id="nav-contact">Contact</button>
+    </div>
+  </nav>
+
   <main>
 
-    <header>
-      <h1 class="site-name">Luca Trevisani</h1>
-      <nav>
-        <a href="#">Home</a>
-        <a href="#">About</a>
-        <a href="#">Blog</a>
-        <a href="#">Books</a>
-        <a href="#">Contact</a>
-      </nav>
-    </header>
+    <!-- HOME -->
+    <div class="page visible" id="page-home">
+      <div class="section-gap">
+        <div class="home-header">
+          <div class="avatar"><span>LT</span></div>
+          <div class="home-header-text">
+            <h1>Luca Trevisani</h1>
+            <p>AI · Blockchain · Robotics · Founder of Augea<br>Solana Superteam Brazil Member</p>
+          </div>
+        </div>
+        <div class="social-links">
+          <a href="https://twitter.com/Lucatrevisani" target="_blank">Twitter</a>
+          <a href="mailto:luca@piolitrevisani.com">Email</a>
+          <a href="https://calendly.com/lucatrevisani" target="_blank">Calendly</a>
+          <a href="https://augea.io" target="_blank">Augea</a>
+        </div>
+      </div>
+    </div>
 
-    <!-- About -->
-    <section>
-      <h2>About</h2>
-      <p class="bio">
-        Hi, I'm Luca — AI, blockchain and x402 specialist. Founder of
-        <a href="#" target="_blank">Augea</a>. Solana
-        <a href="https://superteam.fun/brazil" target="_blank">Superteam Brazil</a> Member.
-      </p>
-      <p class="bio">
-        Discovering Bitcoin at 13 sparked my passion for decentralization, freedom, and
-        self-sovereignty. At 18, I bootstrapped Augea — a privacy-first marketplace for
-        physical AI data — from scratch, with a YC-style execution mindset and 70–90h
-        weeks of focused work. Along the way, I grew an audience of 700k+ viewers
-        creating explainers on Bitcoin and economic freedom.
-      </p>
-      <p class="bio">
-        I believe in freedom, ownership, and open systems. I thrive at the intersection
-        of education, crypto, and building. I can't always know the answer right away,
-        but I'll work relentlessly to find it.
-      </p>
-    </section>
+    <!-- ABOUT -->
+    <div class="page" id="page-about">
+      <h2 class="about-title">About</h2>
+      <div class="about-body">
+        <p>Hi, I'm Luca.<br>
+        AI · Blockchain · Robotics<br>
+        Founder of <strong>Augea</strong><br>
+        Solana Superteam Brazil Member</p>
+        <p>Discovering Bitcoin at 13 sparked my passion for decentralization, freedom, and self-sovereignty. At 18, I bootstrapped Augea, a privacy-first marketplace for physical AI data, from scratch.</p>
+        <p>Along the way, I grew an audience of 700k+ viewers creating explainers on Bitcoin and economic freedom.</p>
+        <p>I believe in freedom, ownership, and open systems. I thrive at the intersection of education, crypto, and building. I can't always know the answer right away, but I'll work relentlessly to find it.</p>
+      </div>
+    </div>
 
-    <!-- Work -->
-    <section>
-      <h2>Work</h2>
-      <ul class="list">
-        <li>
-          <a href="#" target="_blank" style="display:flex;align-items:center;gap:10px;">
-            <img src="augea-logo.png" alt="Augea" style="width:22px;height:22px;border-radius:4px;object-fit:contain;">
-            Augea — Privacy-first marketplace for physical AI data
-          </a>
-          <span class="meta">2025–present</span>
+    <!-- BLOG -->
+    <div class="page" id="page-blog">
+      <h2 class="page-title">Blog</h2>
+      <p style="color: var(--muted);">Coming soon.</p>
+    </div>
+
+    <!-- BOOKS -->
+    <div class="page" id="page-books">
+      <h2 class="books-title">Books</h2>
+      <a class="books-link" href="https://www.goodreads.com/user/show/lucatrevisani" target="_blank">See what I'm reading on Goodreads →</a>
+    </div>
+
+    <!-- CONTACT -->
+    <div class="page" id="page-contact">
+      <h2 class="contact-title">Contact</h2>
+      <p class="contact-sub">I'm always open to conversations about crypto, AI, privacy, and building.</p>
+      <ul class="contact-list">
+        <li class="contact-item">
+          <span class="contact-label">Twitter / X</span>
+          <a class="contact-link" href="https://twitter.com/Lucatrevisani" target="_blank">@Lucatrevisani</a>
         </li>
-        <li>
-          <a href="https://superteam.fun/brazil" target="_blank">Solana Superteam Brazil — Member</a>
-          <span class="meta">2025–present</span>
+        <li class="contact-item">
+          <span class="contact-label">Email</span>
+          <a class="contact-link" href="mailto:luca@piolitrevisani.com">luca@piolitrevisani.com</a>
         </li>
-        <li>
-          <a href="#">Educational Content Developer — Instituto Rothbard Brasil</a>
-          <span class="meta">2022–2025</span>
+        <li class="contact-item">
+          <span class="contact-label">Schedule a call</span>
+          <a class="contact-link" href="https://calendly.com/lucatrevisani" target="_blank">calendly.com/lucatrevisani</a>
         </li>
-        <li>
-          <a href="#">Script Writer — Ancapsu</a>
-          <span class="meta">2020–2023</span>
-        </li>
-        <li>
-          <a href="#">Event Coordinator — Students For Liberty Brasil</a>
-          <span class="meta">2021–2023</span>
+        <li class="contact-item">
+          <span class="contact-label">Augea</span>
+          <a class="contact-link" href="https://augea.io" target="_blank">augea.io</a>
         </li>
       </ul>
-    </section>
-
-    <!-- Blog -->
-    <section>
-      <h2>Blog</h2>
-      <ul class="list">
-        <li>
-          <a href="#">Coming soon</a>
-          <span class="meta">—</span>
-        </li>
-      </ul>
-    </section>
-
-    <!-- Books -->
-    <section>
-      <h2>Books</h2>
-      <ul class="list">
-        <li>
-          <a href="https://www.goodreads.com/friend/i?invite_token=NDk3MmU1MDctNmZmZS00MGE5LWI1OWEtMDdjNjhiYWU4ODhl" target="_blank">Goodreads — see what I'm reading</a>
-          <span class="meta">→</span>
-        </li>
-      </ul>
-    </section>
-
-    <!-- Contact -->
-    <section>
-      <h2>Contact</h2>
-      <p class="bio">
-        <a href="mailto:luca@piolitrevisani.com">luca@piolitrevisani.com</a>
-        &nbsp;·&nbsp;
-        <a href="https://twitter.com/Lucatrevisani" target="_blank">Twitter / X</a>
-      </p>
-    </section>
+    </div>
 
   </main>
 
-  <!-- Rede neural decorativa no fundo -->
-  <div class="network-wrap">
-    <canvas id="network-canvas"></canvas>
-  </div>
-
-  <!-- Dock -->
-  <div class="dock-wrap">
-    <div class="dock" id="dockContainer">
-
-      <a class="dock-item" href="#">
-        <div class="dock-icon" style="background:linear-gradient(145deg,#1e1b4b,#312e81);">🏠</div>
-        <span class="dock-tip">Home</span>
-      </a>
-
-      <a class="dock-item" href="#">
-        <div class="dock-icon" style="background:linear-gradient(145deg,#1e3a5f,#1d4ed8);">👤</div>
-        <span class="dock-tip">About</span>
-      </a>
-
-      <a class="dock-item" href="#">
-        <div class="dock-icon" style="background:linear-gradient(145deg,#0c4a6e,#0369a1);">✏️</div>
-        <span class="dock-tip">Blog</span>
-      </a>
-
-      <a class="dock-item" href="https://www.goodreads.com/friend/i?invite_token=NDk3MmU1MDctNmZmZS00MGE5LWI1OWEtMDdjNjhiYWU4ODhl" target="_blank">
-        <div class="dock-icon" style="background:linear-gradient(145deg,#064e3b,#065f46);">📚</div>
-        <span class="dock-tip">Books</span>
-      </a>
-
-      <a class="dock-item" href="mailto:luca@piolitrevisani.com">
-        <div class="dock-icon" style="background:linear-gradient(145deg,#1e1b4b,#4338ca);">✉️</div>
-        <span class="dock-tip">Contact</span>
-      </a>
-
-    </div>
-  </div>
-
+  <footer>
+    <span>Luca Trevisani © 2025</span>
+    <span>Built with intention.</span>
+  </footer>
 
   <script>
-    /* ═══════════════════════════════
-       REDE NEURAL (partículas + linhas)
-    ═══════════════════════════════ */
-    const canvas = document.getElementById('network-canvas');
-    const ctx    = canvas.getContext('2d');
+    const pages = ['home', 'about', 'blog', 'books', 'contact'];
 
-    function resize() {
-      canvas.width  = canvas.offsetWidth;
-      canvas.height = canvas.offsetHeight;
-    }
-    resize();
-    window.addEventListener('resize', resize);
-
-    const N        = 90;
-    const MAX_DIST = 140;
-    const COLOR    = '74, 222, 128'; // verde Augea
-
-    const pts = Array.from({ length: N }, () => ({
-      x:  Math.random() * canvas.width,
-      y:  Math.random() * canvas.height,
-      vx: (Math.random() - 0.5) * 0.35,
-      vy: (Math.random() - 0.5) * 0.35,
-      r:  Math.random() * 1.5 + 0.8,
-    }));
-
-    function draw() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      /* Linhas */
-      for (let i = 0; i < pts.length; i++) {
-        for (let j = i + 1; j < pts.length; j++) {
-          const dx = pts[i].x - pts[j].x;
-          const dy = pts[i].y - pts[j].y;
-          const d  = Math.hypot(dx, dy);
-          if (d < MAX_DIST) {
-            ctx.beginPath();
-            ctx.moveTo(pts[i].x, pts[i].y);
-            ctx.lineTo(pts[j].x, pts[j].y);
-            ctx.strokeStyle = `rgba(${COLOR}, ${0.18 * (1 - d / MAX_DIST)})`;
-            ctx.lineWidth   = 0.6;
-            ctx.stroke();
-          }
+    function showPage(id) {
+      pages.forEach(p => {
+        const page = document.getElementById('page-' + p);
+        const btn  = document.getElementById('nav-' + p);
+        if (p === id) {
+          page.classList.add('visible');
+          btn.classList.add('active');
+          page.style.animation = 'none';
+          page.offsetHeight;
+          page.style.animation = '';
+        } else {
+          page.classList.remove('visible');
+          btn.classList.remove('active');
         }
-      }
-
-      /* Pontos */
-      pts.forEach(p => {
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(${COLOR}, 0.55)`;
-        ctx.fill();
-
-        p.x += p.vx;
-        p.y += p.vy;
-        if (p.x < 0 || p.x > canvas.width)  p.vx *= -1;
-        if (p.y < 0 || p.y > canvas.height)  p.vy *= -1;
-      });
-
-      requestAnimationFrame(draw);
-    }
-    draw();
-
-
-    /* ═══════════════════════════════
-       DOCK — EFEITO DE AMPLIAÇÃO
-    ═══════════════════════════════ */
-    const dock  = document.getElementById('dockContainer');
-    const items = dock.querySelectorAll('.dock-item');
-    const BASE  = 44, MAX = 70, SPREAD = 110;
-
-    function magnify(mx) {
-      items.forEach(item => {
-        const icon = item.querySelector('.dock-icon');
-        const r    = icon.getBoundingClientRect();
-        const cx   = r.left + r.width / 2;
-        const t    = Math.max(0, 1 - Math.abs(mx - cx) / SPREAD);
-        const s    = BASE + (MAX - BASE) * t;
-        icon.style.width        = s + 'px';
-        icon.style.height       = s + 'px';
-        icon.style.fontSize     = (s * .54) + 'px';
-        icon.style.borderRadius = (s * .27) + 'px';
       });
     }
-    function reset() {
-      items.forEach(item => {
-        const icon = item.querySelector('.dock-icon');
-        icon.style.width        = BASE + 'px';
-        icon.style.height       = BASE + 'px';
-        icon.style.fontSize     = (BASE * .54) + 'px';
-        icon.style.borderRadius = (BASE * .27) + 'px';
-      });
-    }
-
-    dock.addEventListener('mousemove',  e => magnify(e.clientX));
-    dock.addEventListener('mouseleave', reset);
   </script>
 
 </body>
