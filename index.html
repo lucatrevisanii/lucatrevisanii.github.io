@@ -243,10 +243,37 @@ main {
   to   { opacity: 1; transform: translateY(0); }
 }
 main       { animation: up .5s ease both; }
+
+  /* ── Globe background ── */
+  #globe-canvas {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 0;
+    pointer-events: none;
+  }
+  nav, main, footer { position: relative; z-index: 10; }
+
+  /* Override site bg to transparent so globe shows */
+  body { background: #0a0a0a !important; }
+  :root {
+    --bg:     #0a0a0a;
+    --ink:    #f0f0f0;
+    --muted:  #888;
+    --accent: #60a5fa;
+    --border: #222;
+  }
+  nav { background: rgba(10,10,10,0.85) !important; backdrop-filter: blur(12px); }
+  footer { background: rgba(10,10,10,0.85) !important; backdrop-filter: blur(12px); }
+
+  /* dat.GUI panel - keep on top */
+  .dg.ac { z-index: 9999 !important; }
+
 </style>
 </head>
 <body>
 
+<canvas id="globe-canvas"></canvas>
 <nav>
   <span class="nav-logo" onclick="showPage('home')">Luca Trevisani</span>
   <div class="nav-links">
@@ -274,7 +301,7 @@ main       { animation: up .5s ease both; }
       </div>
       <div class="social-links">
         <a href="https://twitter.com/Lucatrevisani" target="_blank">Twitter</a>
-        <a href="mailto:luca@piolitrevisani.com">Email</a>
+        <a href="/cdn-cgi/l/email-protection#076b72646647776e686b6e737562716e7466696e2964686a">Email</a>
         <a href="https://calendly.com/lucatrevisani" target="_blank">Calendly</a>
         <a href="https://augea.org" target="_blank">Augea</a>
       </div>
@@ -318,7 +345,7 @@ main       { animation: up .5s ease both; }
       </li>
       <li class="contact-item">
         <span class="contact-label">Email</span>
-        <a class="contact-link" href="mailto:luca@piolitrevisani.com">luca@piolitrevisani.com</a>
+        <a class="contact-link" href="/cdn-cgi/l/email-protection#d7bba2b4b697a7beb8bbbea3a5b2a1bea4b6b9bef9b4b8ba"><span class="__cf_email__" data-cfemail="5c30293f3d1c2c35333035282e392a352f3d3235723f3331">[email&#160;protected]</span></a>
       </li>
       <li class="contact-item">
         <span class="contact-label">Schedule a call</span>
@@ -338,7 +365,7 @@ main       { animation: up .5s ease both; }
   <span>Built with intention.</span>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   const pages = ['home', 'about', 'blog', 'books', 'contact'];
 
   function showPage(id) {
@@ -346,18 +373,4 @@ main       { animation: up .5s ease both; }
       const page = document.getElementById('page-' + p);
       const btn  = document.getElementById('nav-' + p);
       if (p === id) {
-        page.classList.add('visible');
-        btn.classList.add('active');
-        page.style.animation = 'none';
-        page.offsetHeight;
-        page.style.animation = '';
-      } else {
-        page.classList.remove('visible');
-        btn.classList.remove('active');
-      }
-    });
-  }
-</script>
-
-</body>
-</html>
+        page.classList.a
