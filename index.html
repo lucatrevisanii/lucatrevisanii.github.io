@@ -196,6 +196,7 @@ main{max-width:680px;margin:0 auto;padding:56px 24px 32px}
       <li><button id="nb-about"   onclick="go('about')">About</button></li>
       <li><button id="nb-blog"    onclick="go('blog')">Blog</button></li>
       <li><button id="nb-books"   onclick="go('books')">Reads</button></li>
+      <li><button id="nb-films"   onclick="go('films')">Films</button></li>
       <li><button id="nb-contact" onclick="go('contact')">Contact</button></li>
     </ul>
     <button class="tgl" id="tglBtn" onclick="tglTheme()">&#9790; Night</button>
@@ -215,6 +216,8 @@ main{max-width:680px;margin:0 auto;padding:56px 24px 32px}
       <a href="mailto:luca@piolitrevisani.com">Email</a>
       <a href="https://calendly.com/lucatrevisani" target="_blank">Calendly</a>
       <a href="https://augea.org" target="_blank">Augea</a>
+      <a href="https://letterboxd.com/LucaTrevisani/" target="_blank">Films</a>
+      <a href="https://www.goodreads.com/user/show/199145768-luca-trevisani" target="_blank">Books</a>
     </div>
 
     <!-- GLOBE -->
@@ -255,8 +258,8 @@ main{max-width:680px;margin:0 auto;padding:56px 24px 32px}
   <div class="page" id="p-about">
     <h2 class="ptit">About</h2>
     <div class="about">
-      <p>Hi, I'm Luca.<br>AI &middot; Blockchain &middot; Robotics<br>Founder of <strong>Augea</strong><br>Solana Superteam Brazil Member</p>
-      <p>Discovering Bitcoin at 13 sparked my passion for decentralization, freedom, and self-sovereignty. At 18, I bootstrapped Augea &mdash; a privacy-first marketplace for physical AI data &mdash; from scratch.</p>
+      <p>Hi, I'm Luca.<br>AI &middot; Blockchain &middot; Robotics<br>Founder of <strong>Augea</strong> &amp; <strong>Colpero</strong><br>Solana Superteam Brazil Member</p>
+      <p>Discovering Bitcoin at 13 sparked my passion for decentralization, freedom, and self-sovereignty. At 18, I co-founded <strong>Augea</strong> &mdash; a neutral infrastructure layer for AI training data, connecting private data owners to frontier AI labs. On-chain provenance, zero platform fees, quality-validated datasets.</p>
       <p>Along the way, I grew an audience of 700k+ viewers creating explainers on Bitcoin and economic freedom.</p>
       <p>I believe in freedom, ownership, and open systems. I thrive at the intersection of education, crypto, and building.</p>
     </div>
@@ -271,7 +274,13 @@ main{max-width:680px;margin:0 auto;padding:56px 24px 32px}
   <!-- READS -->
   <div class="page" id="p-books">
     <h2 class="ptit">Reads</h2>
-    <a class="blnk" href="https://www.goodreads.com/friend/i?invite_token=ODVkYzE5OGItOGI1MC00MmVkLWJmYjAtYjc5YmM0ZTlkZDI" target="_blank">See what I&rsquo;m reading on Goodreads &rarr;</a>
+    <a class="blnk" href="https://www.goodreads.com/user/show/199145768-luca-trevisani" target="_blank">See what I&rsquo;m reading on Goodreads &rarr;</a>
+  </div>
+
+  <!-- FILMS -->
+  <div class="page" id="p-films">
+    <h2 class="ptit">Films</h2>
+    <a class="blnk" href="https://letterboxd.com/LucaTrevisani/" target="_blank">See what I&rsquo;m watching on Letterboxd &rarr;</a>
   </div>
 
   <!-- CONTACT -->
@@ -292,7 +301,7 @@ main{max-width:680px;margin:0 auto;padding:56px 24px 32px}
 </footer>
 <script>
 /* ── NAV ── */
-var PG=['home','about','blog','books','contact'];
+var PG=['home','about','blog','books','films','contact'];
 function go(id){
   PG.forEach(function(p){
     var e=document.getElementById('p-'+p);
