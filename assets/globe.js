@@ -5,6 +5,10 @@ function sp(key,val,lid,dec){
   G[key]=val;
   G.dirty=true;
 }
+function sc(key,val){
+  G[key]=val;
+  G.dirty=true;
+}
 var G={
   amt:1800,rad:88,con:3,dst:18,
   lop:0.35,fuz:10,dsz:2.5,dop:0.7,
